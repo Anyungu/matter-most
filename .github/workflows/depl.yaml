@@ -21,7 +21,7 @@ jobs:
       #   run: sudo chmod 600 key.prm
 
       - name: Copy Docker Compose file into server
-        run: scp -i key.pem docker-compose.yaml ${{ secrets.REMOTE_SERVER_USER }}@${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}:/
+        run: scp -i key.pem docker-compose.yaml ${{ secrets.REMOTE_SERVER_USER }}@${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}:~/
       # - name: ssh into server
       #   uses: aws-actions/configure-aws-credentials@v1
       #   with:
