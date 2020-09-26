@@ -12,7 +12,7 @@ services:
       - POSTGRES_PASSWORD=mmuser_password
       - POSTGRES_DB=mattermost
 
-    container_name: dba
+    container_name: db
 
   app:
     image: mattermost/mattermost-team-edition
@@ -47,4 +47,4 @@ services:
       - PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!
       - PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10
       - PGADMIN_LISTEN_PORT=9999
-    container_name: app
+    container_name: pg

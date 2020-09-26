@@ -1,9 +1,9 @@
-name: depl
+name: setup
 
 on:
   push:
     branches:
-      - stage
+      - setup
     # paths:
     #   - ingredients/**
 
@@ -14,22 +14,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: copy compose file via ssh key
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
-          username: ${{ secrets.REMOTE_SERVER_USER }}
-          port: 22
-          key: ${{ secrets.REMOTE_SSH_KEY }}
-          source: "docker-compose.yaml"
-          target: "docker-compose.yaml"
-
-      - name: ls -a via ssh
+      - name: Install Docker && Docker compose
         uses: fifsky/ssh-action@master
         with:
           command: |
-            ls -a
-            docker-compose stop
+            sudo apt-get remove docker docker-engine docker.io containerd runc
+            sudo apt-get update
+            sudo apt-get install \
+                apt-transport-https \
+                ca-certificates \
+                curl \
+                gnupg-agent \
+                software-properties-common
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            sudo add-apt-repository \
+                "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+                $(lsb_release -cs) \
+                stable"
+            sudo apt-get update
+            sudo apt-get install docker-ce docker-ce-cli containerd.io
+            ocker-compose stop
             docker system prune
             docker-compose start
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
