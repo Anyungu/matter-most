@@ -28,7 +28,6 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            sudo rm /etc/yum.repos.d/docker-ce.repo
             sudo yum remove docker 
             sudo yum update
             sudo amazon-linux-extras install docker
