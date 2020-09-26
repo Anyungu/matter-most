@@ -30,19 +30,12 @@ jobs:
           command: |
             sudo yum remove docker docker-engine docker.io containerd runc
             sudo yum update
-
-
-            sudo yum install -y docker
-
-            sudo usermod -a -G docker ec2-user
+            sudo amazon-linux-extras install docker
             sudo service docker start
-
 
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose stop
-            docker system prune
-            docker-compose start
+            sudo docker-compose start
 
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
