@@ -1,0 +1,35 @@
+name: depl-ingredients
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ingredients/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Write ssh key into file
+        run: echo "${{ secrets.REMOTE_SSH_KEY }}" > key
+
+      - name: Sort key permissions
+        run: sudo chmod 600 key
+
+      - name: Copy Docker Compose file into server
+        run: scp -i key docker-compose.yaml "${{ secrets.REMOTE_SERVER_USER }}"@"${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}":/
+      # - name: ssh into server
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: eu-west-1
+      # - name: Set up kubernetes context
+      #   run: aws eks --region ${{ secrets.REGION_CODE }} update-kubeconfig --name ${{ secrets.CLUSTER_NAME }}
+      # - name: Deploy
+      #   run: |
+      #     kubectl rollout restart deployment/ing
