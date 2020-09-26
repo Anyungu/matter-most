@@ -22,7 +22,7 @@ jobs:
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: "docker-compose.yaml"
-          target: "/dock"
+          target: "dock"
 
       - name: Install Docker && Docker compose
         uses: fifsky/ssh-action@master
