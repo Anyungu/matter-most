@@ -38,7 +38,8 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose
 
             sudo mkdir -pv ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
-            sudo chown -R 2000:2000 ./volumes/app/mattermost/
+
+            sudo chown -R ec2-user:ec2-user ./volumes/app/mattermost/
 
             cd dock
             sudo docker-compose up -d
