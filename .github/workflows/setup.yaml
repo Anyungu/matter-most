@@ -14,6 +14,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: copy compose file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
+          username: ${{ secrets.REMOTE_SERVER_USER }}
+          port: 22
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          source: "docker-compose.yaml"
+          target: "docker-compose.yaml"
+
       - name: Install Docker && Docker compose
         uses: fifsky/ssh-action@master
         with:
