@@ -22,13 +22,13 @@ jobs:
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: "docker-compose.yaml"
-          target: "docker-compose.yaml"
-
+          target: "dock"
       - name: ls -a via ssh
         uses: fifsky/ssh-action@master
         with:
           command: |
             ls -a
+            cd dock
             docker-compose stop
             docker system prune
             docker-compose start
