@@ -37,9 +37,9 @@ jobs:
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
 
-            sudo mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
+            mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
 
-            sudo chown -R 2000:2000 ./volumes/app/mattermost/
+            chown -R 2000:2000 ./volumes/app/mattermost/
 
             cd dock
             sudo docker-compose up -d
