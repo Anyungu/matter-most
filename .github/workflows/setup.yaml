@@ -44,7 +44,7 @@ jobs:
 
       - name: lol
         run: ls -a
-      # - name: ssh into server  ssh works
+      # - name: ssh into server  ssh works new ip
       #   uses: aws-actions/configure-aws-credentials@v1
       #   with:
       #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
