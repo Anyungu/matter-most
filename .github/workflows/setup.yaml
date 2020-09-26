@@ -30,20 +30,13 @@ jobs:
           command: |
             sudo yum remove docker docker-engine docker.io containerd runc
             sudo yum update
-            sudo yum install \
-                apt-transport-https \
-                ca-certificates \
-                curl \
-                gnupg-agent \
-                software-properties-common
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-            sudo yum-config-manager --add-repo \
-                "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-                $(lsb_release -cs) \
-                stable"
 
-            sudo yum update
-            sudo yum install docker-ce docker-ce-cli containerd.io
+
+            sudo yum install -y docker
+
+            sudo usermod -a -G docker ec2-user
+            sudo service docker start
+
 
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
