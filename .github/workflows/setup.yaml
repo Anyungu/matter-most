@@ -40,7 +40,6 @@ jobs:
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          args: "-tt -vvv"
 
       - name: lol
         run: ls -a
