@@ -18,9 +18,9 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            sudo apt-get remove docker docker-engine docker.io containerd runc
-            sudo apt-get update
-            sudo apt-get install \
+            sudo yum remove docker docker-engine docker.io containerd runc
+            sudo yum update
+            sudo yum install \
                 apt-transport-https \
                 ca-certificates \
                 curl \
@@ -31,8 +31,8 @@ jobs:
                 "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
                 $(lsb_release -cs) \
                 stable"
-            sudo apt-get update
-            sudo apt-get install docker-ce docker-ce-cli containerd.io
+            sudo yum update
+            sudo yum install docker-ce docker-ce-cli containerd.io
             ocker-compose stop
             docker system prune
             docker-compose start
