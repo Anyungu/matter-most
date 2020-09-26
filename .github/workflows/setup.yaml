@@ -27,15 +27,16 @@ jobs:
                 gnupg-agent \
                 software-properties-common
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-            sudo add-apt-repository \
+            sudo yum-config-manager --add-repo \
                 "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
                 $(lsb_release -cs) \
                 stable"
             sudo yum update
             sudo yum install docker-ce docker-ce-cli containerd.io
-            ocker-compose stop
+            docker-compose stop
             docker system prune
             docker-compose start
+
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
