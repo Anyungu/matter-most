@@ -18,11 +18,11 @@ services:
     image: mattermost/mattermost-team-edition
     restart: unless-stopped
     volumes:
-      - ./volumes/app/mattermost/config:/mattermost/config:rw
-      - ./volumes/app/mattermost/data:/mattermost/data:rw
-      - ./volumes/app/mattermost/logs:/mattermost/logs:rw
-      - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw
-      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
+      - ./volumes/app/mattermost/config:/mattermost/config
+      - ./volumes/app/mattermost/data:/mattermost/data
+      - ./volumes/app/mattermost/logs:/mattermost/logs
+      - ./volumes/app/mattermost/plugins:/mattermost/plugins
+      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins
       - /etc/localtime:/etc/localtime:ro
     environment:
       - MM_USERNAME=mmuser
@@ -34,13 +34,6 @@ services:
   pgAdmin:
     image: dpage/pgadmin4
     restart: unless-stopped
-    volumes:
-      - ./volumes/app/mattermost/config:/mattermost/config:rw
-      - ./volumes/app/mattermost/data:/mattermost/data:rw
-      - ./volumes/app/mattermost/logs:/mattermost/logs:rw
-      - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw
-      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
-      - /etc/localtime:/etc/localtime:ro
     environment:
       - PGADMIN_DEFAULT_EMAIL=anyungucw@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=iamaccess123
