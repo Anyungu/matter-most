@@ -21,7 +21,7 @@ jobs:
         run: echo key
 
       - name: Copy Docker Compose file into server
-        run: ssh -i key ${{ secrets.REMOTE_SERVER_USER }}@${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
+        run: ssh -i nyungu-key-pair.pem ${{ secrets.REMOTE_SERVER_USER }}@${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
 
       - name: lol
         run: ls -a
