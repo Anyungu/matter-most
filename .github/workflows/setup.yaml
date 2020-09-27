@@ -52,7 +52,6 @@ jobs:
         with:
           command: |
             ls -a
-            docker system prune -a --volumes -y
             docker-compose build 
             docker-compose up -d
 
