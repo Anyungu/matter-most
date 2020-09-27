@@ -15,7 +15,7 @@ services:
     container_name: db
 
   app:
-    image: mattermost/mattermost-prod-app
+    image: anyungu/matter:latest
     restart: unless-stopped
     volumes:
       - ./volumes/app/mattermost/config:/mattermost/config

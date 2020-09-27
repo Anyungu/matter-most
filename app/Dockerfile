@@ -6,8 +6,8 @@ ENV MM_VERSION=5.27.0
 
 # Build argument to set Mattermost edition
 ARG edition=team
-ARG PUID=2000
-ARG PGID=2000
+ARG PUID=1000
+ARG PGID=1000
 ARG MM_BINARY=
 
 
@@ -25,10 +25,6 @@ RUN apk add --no-cache \
     xmlsec-dev \
     tzdata \
     && rm -rf /tmp/*
-
-
-
-
 
 # Get Mattermost
 RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
@@ -52,11 +48,8 @@ HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 # Configure entrypoint and command
 COPY entrypoint.sh /
 
-RUN chmod +x entrypoint
 
-ENTRYPOINT ["sh", "/entrypoint.sh"]
-
-
+ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /mattermost
 CMD ["mattermost"]
 
