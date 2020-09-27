@@ -64,8 +64,6 @@ jobs:
         with:
           command: |
             ls -a
-
-
             cd dock
             docker-compose up -d
 
