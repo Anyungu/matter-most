@@ -51,7 +51,10 @@ jobs:
 
 
 
-            mkdir -pv ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
+            mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
+
+            sudo chown -R 1000:1000 ./volumes/app/mattermost/
+
             sudo chmod 777 -R ./volumes
 
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
