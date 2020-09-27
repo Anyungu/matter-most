@@ -50,6 +50,7 @@ jobs:
         with:
           command: |
             ls -a
+            docker-compose down
             docker-compose build
             docker-compose up -d
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
