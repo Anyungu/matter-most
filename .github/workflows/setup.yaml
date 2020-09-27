@@ -43,30 +43,32 @@ jobs:
             sudo amazon-linux-extras install docker
             sudo service docker start
 
+            sudo usermod -a -G docker ec2-user
+
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
 
-            sudo mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
 
-            sudo chown -R 2000:2000 ./volumes/app/mattermost/
 
-            cd dock
-            sudo docker-compose up -d
+
+            mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
+
+            chown -R 2000:2000 ./volumes/app/mattermost/
 
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
 
-      - name: lol
-        run: ls -a
-      # - name: ssh into server  ssh works new ip
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: eu-west-1
-      # - name: Set up kubernetes context
-      #   run: aws eks --region ${{ secrets.REGION_CODE }} update-kubeconfig --name ${{ secrets.CLUSTER_NAME }}
-      # - name: Deploy
-      #   run: |
-      #     kubectl rollout restart deployment/ing
+      - name: Fry things up
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            ls -a
+
+
+            cd dock
+            docker-compose up -d
+
+          host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
+          user: ${{ secrets.REMOTE_SERVER_USER }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
