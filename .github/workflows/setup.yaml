@@ -21,13 +21,12 @@ jobs:
           username: ${{ secrets.REMOTE_SERVER_USER }}
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          source: "docker-compose.yaml,app/Dockerfile,app/entrypoint.sh"
+          source: "docker-compose.yaml,Dockerfile,entrypoint.sh"
           target: "~"
       # - name: Install Docker && Docker compose
       #   uses: fifsky/ssh-action@master
       #   with:
       #     command: |
-      
       #       rm -rf volumes/
       #       ls -a
       #       sudo yum remove docker -y
