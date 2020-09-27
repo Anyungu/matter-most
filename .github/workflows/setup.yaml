@@ -65,7 +65,7 @@ jobs:
           command: |
             ls -a
             cd dock
-            docker-compose up -d
+            sudo docker-compose up -d
 
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
