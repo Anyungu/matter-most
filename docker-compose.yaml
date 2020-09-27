@@ -16,7 +16,7 @@ services:
 
   app:
     build:
-      context: mattermost/app
+      context: dock
       # uncomment following lines for team edition or change UID/GID
       args:
         - edition=team
