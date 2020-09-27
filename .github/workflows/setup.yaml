@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.REMOTE_SERVER_USER }}
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          source: "docker-compose.yaml,Dockerfile,entrypoint.sh"
+          source: "docker-compose.yaml,Dockerfile,entrypoint.sh,db/*"
           target: "~"
 
       - name: Install Docker && Docker compose
