@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.REMOTE_SERVER_USER }}
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          source: "docker-compose.yaml, mattermost-docker/app/Dockerfile, mattermost-docker/app/entrypoint.sh"
+          source: "docker-compose.yaml,mattermost-docker/app/Dockerfile,mattermost-docker/app/entrypoint.sh"
           target: "~"
 
       - name: Install Docker && Docker compose
@@ -52,8 +52,7 @@ jobs:
         with:
           command: |
             ls -a
-            docker container prune -y
-            docker image prune -y
+            docker system prune -a --volumes
             docker-compose build 
             docker-compose up -d
 
