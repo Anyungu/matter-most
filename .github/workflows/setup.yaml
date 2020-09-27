@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.REMOTE_SERVER_USER }}
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          source: "docker-compose.yaml,app/Dockerfile,app/entrypoint.sh"
+          source: "app/Dockerfile,app/entrypoint.sh"
           target: "~"
       # - name: Install Docker && Docker compose
       #   uses: fifsky/ssh-action@master
