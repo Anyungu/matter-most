@@ -69,7 +69,6 @@ services:
     restart: unless-stopped
     ports:
       - "9999:80"
-      - "443:443"
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=anyungucw@gmail.com
