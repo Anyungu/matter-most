@@ -18,6 +18,7 @@ services:
     #  - WALE_S3_PREFIX=s3://BUCKET_NAME/PATH
     #  - AWS_REGION=us-east-1
     # reload
+    container_name: db
 
   app:
     build:
@@ -49,6 +50,7 @@ services:
       # MM_SQLSETTINGS_DATASOURCE=postgres://mmuser:mmuser_password@db:5432/mattermost?sslmode=disable&connect_timeout=10
       # in case your config is not in default location
       #- MM_CONFIG=/mattermost/config/config.json
+    container_name: app
 
   web:
     build: web
@@ -61,3 +63,15 @@ services:
       # This directory must have cert files if you want to enable SSL
       - ./volumes/web/cert:/cert:ro
       - /etc/localtime:/etc/localtime:ro
+    container_name: web
+
+  pg:
+    restart: unless-stopped
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=anyungucw@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=lol
+      - PGADMIN_LISTEN_PORT=9999
+      - PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"
+
+    container_name: pg
