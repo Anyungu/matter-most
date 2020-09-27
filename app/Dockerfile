@@ -28,7 +28,7 @@ RUN apk add --no-cache \
 
 
 
-RUN chmod +x /opt/consul/scripts/registeringress.sh
+
 
 # Get Mattermost
 RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
