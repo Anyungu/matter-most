@@ -15,14 +15,20 @@ services:
     container_name: db
 
   app:
-    image: mattermost/mattermost-prod-app
+    build:
+      context: mattermost/app
+      # uncomment following lines for team edition or change UID/GID
+      args:
+        - edition=team
+        - PUID=1000
+        - PGID=1000
     restart: unless-stopped
     volumes:
-      - ./volumes/app/mattermost/config:/mattermost/config
-      - ./volumes/app/mattermost/data:/mattermost/data
-      - ./volumes/app/mattermost/logs:/mattermost/logs
-      - ./volumes/app/mattermost/plugins:/mattermost/plugins
-      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins
+      - ./volumes/app/mattermost/config:/mattermost/config:rw
+      - ./volumes/app/mattermost/data:/mattermost/data:rw
+      - ./volumes/app/mattermost/logs:/mattermost/logs:rw
+      - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw
+      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - MM_USERNAME=mmuser
