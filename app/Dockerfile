@@ -51,7 +51,10 @@ HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 # Configure entrypoint and command
 COPY entrypoint.sh /
 
+USER root
 RUN chmod +x entrypoint.sh
+
+USER mattermost
 
 ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /mattermost
