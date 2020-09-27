@@ -67,11 +67,13 @@ services:
 
   pg:
     restart: unless-stopped
+    ports:
+      - "9999:80"
+      - "443:443"
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=anyungucw@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=lol
-      - PGADMIN_LISTEN_PORT=9999
       - PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"
 
     container_name: pg
