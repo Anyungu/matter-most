@@ -16,7 +16,7 @@ services:
 
   app:
     build:
-      context: dock
+      context: .
       # uncomment following lines for team edition or change UID/GID
       args:
         - edition=team
