@@ -37,6 +37,8 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
+            rm -rf volumes/
+
             ls -a
             sudo yum remove docker -y
             sudo yum update

@@ -41,3 +41,4 @@ services:
       - PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10
       - PGADMIN_LISTEN_PORT=9999
     container_name: pg
+## chown
