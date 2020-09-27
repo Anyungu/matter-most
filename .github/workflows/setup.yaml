@@ -19,11 +19,10 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           username: ${{ secrets.REMOTE_SERVER_USER }}
-          rm: true
           port: 22
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: "docker-compose.yaml, mattermost-docker/app/Dockerfile, mattermost-docker/app/entrypoint.sh"
-          target: "dock"
+          target: "~"
 
       - name: Install Docker && Docker compose
         uses: fifsky/ssh-action@master
@@ -55,8 +54,8 @@ jobs:
             ls -a
             docker container prune -y
             docker image prune -y
-            docker-compose build -f dock/docker-compose.yaml
-            docker-compose up -d -f dock/docker-compose.yaml
+            docker-compose build 
+            docker-compose up -d
 
           host: ${{ secrets.REMOTE_SERVER_IP_OR_DOMAIN }}
           user: ${{ secrets.REMOTE_SERVER_USER }}
