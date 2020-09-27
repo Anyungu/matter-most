@@ -14,6 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          path: ingredients
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: anyungu/matter
+          tags: latest
+
       - name: copy compose file via ssh key
         uses: appleboy/scp-action@master
         with:
@@ -39,7 +48,7 @@ jobs:
 
             mkdir -p ./volumes/app/mattermost/{data,logs,config,plugins,client-plugins}
 
-
+            chown -R 2000:2000 ./volumes/app/mattermost/
 
             cd dock
             sudo docker-compose up -d
