@@ -31,8 +31,8 @@ jobs:
           command: |
             sudo rm -rf volumes/
             ls -a
-
-            sudo yum update
+            sudo yum remove docker -y
+            sudo yum update -y
             sudo amazon-linux-extras install docker
             sudo service docker start
             sudo usermod -a -G docker ec2-user
