@@ -24,6 +24,7 @@ services:
     #  - AWS_SECRET_ACCESS_KEY=XXXX
     #  - WALE_S3_PREFIX=s3://BUCKET_NAME/PATH
     #  - AWS_REGION=us-east-1
+    # reload set up
     networks:
       matter_lan:
         ipv4_address: 172.28.1.99
