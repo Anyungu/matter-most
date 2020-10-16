@@ -23,6 +23,7 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: "docker-compose.yaml,app/*,db/*,web/*"
           target: "~"
+          overwrite: true
 
       - name: Install Docker && Docker compose
         uses: fifsky/ssh-action@master

@@ -1,5 +1,12 @@
 version: "3"
 
+networks:
+  matter_lan:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
 services:
   db:
     build: db
@@ -17,7 +24,9 @@ services:
     #  - AWS_SECRET_ACCESS_KEY=XXXX
     #  - WALE_S3_PREFIX=s3://BUCKET_NAME/PATH
     #  - AWS_REGION=us-east-1
-    # reload
+    networks:
+      matter_lan:
+        ipv4_address: 172.28.1.99
 
   app:
     build:
@@ -46,9 +55,12 @@ services:
 
       # use the credentials you've set above, in the format:
       # MM_SQLSETTINGS_DATASOURCE=postgres://${MM_USERNAME}:${MM_PASSWORD}@db:5432/${MM_DBNAME}?sslmode=disable&connect_timeout=10
-      - MM_SQLSETTINGS_DATASOURCE=postgres://mmuser:mmuser_password@db:5432/mattermost?sslmode=disable&connect_timeout=10
+      - MM_SQLSETTINGS_DATASOURCE=postgres://mmuser:mmuser_password@172.28.1.99:5432/mattermost?sslmode=disable&connect_timeout=10
+
       # in case your config is not in default location
       #- MM_CONFIG=/mattermost/config/config.json
+    networks:
+      matter_lan:
 
   web:
     build: web
@@ -61,6 +73,8 @@ services:
       # This directory must have cert files if you want to enable SSL
       - ./volumes/web/cert:/cert:ro
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      matter_lan:
 
   pg:
     restart: unless-stopped
@@ -71,3 +85,5 @@ services:
       - PGADMIN_DEFAULT_EMAIL=anyungucw@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=lol
       - PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"
+    networks:
+      matter_lan:
