@@ -31,7 +31,7 @@ jobs:
           command: |
             sudo rm -rf volumes/
             ls -a
-            sudo yum remove docker -y
+
             sudo yum update
             sudo amazon-linux-extras install docker
             sudo service docker start
